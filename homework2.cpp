@@ -1,28 +1,88 @@
-//
-// Created by misha on 29.09.2026.
-//
 #include <iostream>
-#include <string>
 using namespace std;
 
-// task 1
+const int MaxSize = 10;
 
-int convertStringToInt(string s) {
-    int length = s.length();
-    int num = 0;
-    int temp = 0;
-    for (int i = 0; i < length; i++) {
-        temp = s[i] - '0';
-        num = num * 10 + temp;
-        temp = 0;
+class Stack {
+private:
+    char data[MaxSize];
+    int count;
+
+public:
+    Stack() {
+        count = 0;
     }
-    return num;
-}
+
+    bool IsEmpty() {
+        if (count == 0) {
+            return true;
+        }
+    }
+
+    bool IsFull() {
+        if (count == MaxSize) {
+            return true;
+        }
+    }
+
+    void Add(char value) {
+        if (IsFull()) {
+            cout << "Stack is full" << endl;
+            return;
+        }
+
+        data[count] = value;
+        count++;
+    }
+
+    void Pop() {
+        if (IsEmpty()) {
+            cout << "Stack is empty" << endl;
+            return;
+        }
+
+        count--;
+    }
+
+    int GetCount() {
+        return count;
+    }
+
+    void Clear() {
+        count = 0;
+    }
+
+    char Top() {
+        if (IsEmpty()) {
+            cout << "Stack is empty" << endl;
+            return '\0';
+        }
+
+        return data[count - 1];
+    }
+
+    char Print() {
+        if (IsEmpty()) {
+            cout << "Stack is empty" << endl;
+            return '\0';
+        }
+        else {
+            for (int i = 0; i < count; i++) {
+                cout << data[i] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
 
 int main() {
-    string s = "123";
-    int num = convertStringToInt(s);
-    cout << num << endl;
-    int num2 = num + 123;
-    cout << num2 << endl;
+    Stack stack;
+
+    stack.Add('A');
+    stack.Add('B');
+    stack.Print();
+    stack.Pop();
+    stack.Print();
+    stack.Clear();
+    stack.Print();
 }
